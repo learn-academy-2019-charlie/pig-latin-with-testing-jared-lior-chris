@@ -2,12 +2,50 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Pig Latin Project</title>
+        <link rel="stylesheet" href="piglatin.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel='icon' href='android-chrome-192x192.png'/>
+        <title>Pig Latin Translator</title>
     </head>
     <body>
-        <h1>Pig Latin</h1>
-        <input type="text" id="user-input">
-        <button type="button" name="button" onclick="translate">Click me!</button>
-        <p id="answers"></p>
+        <div class="header-wrap">
+
+            <div class="header">
+                <h1>Pig Latin Translator</h1>
+            </div>
+        </div>
+    <div class="textarea">
+        <div class="textinput">
+            <textarea id="user-input" placeholder="English goes here..."></textarea>
+
+        </div>
+
+        <div class="textoutput">
+            <textarea id="answers" placeholder="And pig latin will appear here..." ></textarea>
+        </div>
+    </div>
+
+    <div class="buttonbox">
+    <button type="button" onclick="getElementById('answers').innerHTML = pigLatin(getElementById('user-input').value)" id="translate" class="btn btn-dark">Translate</button>
+    </div>
+    <div class="rules">
+        <h3>Rules For Pig Latin</h3>
+        <ol>
+            <li>For words beginning with a vowel, add "way" to the end.</li>
+            <li>For words beginning with one or more consonants, move all of the first consecutive consonants to the end, and add "ay".</li>
+            <li>If the first consonants include "qu", move the "u" along with the "q". Don't forget about words like "squeal" where "qu" doesn't come first!</li>
+            <li>For words beginning with "y", treat "y" as a consonant.</li>
+        </ol>
+    </div>
+    <script type="text/javascript" src= "piglatin.js"></script>
+
+    <div class="footer">
+        <footer>
+            <h3>Jared | Lior | Chris M.</h3>
+        </footer>
+    </div>
+
     </body>
 </html>

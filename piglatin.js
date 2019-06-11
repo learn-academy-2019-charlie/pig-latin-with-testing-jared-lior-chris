@@ -1,133 +1,72 @@
-//pseudo code
-//write a function that takes the user input
-//test the user input for pig latin rules
-//change the user input depending on which rules to obey
-//return the translated output
+var userInput = document.getElementById("user-input").value
 
-// var userInput = document.getElementById("user-input").value
-var vowels = ["A", "a", "E", "e", "I", "i", "O", "o", "U", "u"]
-//
-// function asVowels (str) {
-//     var newArr = str.split(" ")
-//     for (let i = 0; i < newArr.length; i++) {
-//         for (let j = 0; j < vowels.length; j++) {
-//             if(newArr[i].charAt(0) === vowels[j]){
-//                 newArr[i] = newArr[i] + "way"
-//             }
-//         }
-//     } return newArr
-// }
 
-// function startsWithY (string) {
-//     var newArr = string.split(" ")
-//     for (let i = 0; i < newArr.length; i++) {
-//         if (newArr[i].charAt(0) === "Y" || newArr[i].charAt(0) === "y") {
-//             newArr[i] = newArr[i].substring(1)
-//             newArr[i] = newArr[i]+"yay"
-//         }
-//     }
-//     return newArr
-// }
-// console.log(asVowels("in downtown abbey eats"))
-// console.log(startsWithY("Yellow yollo"));
-//
-// function startWithConst (string) {
-//     var newArr = string.split(" ")
-//     for (let i = 0; i < newArr.length; i++) {
-//         for (let j = 0; j < vowels.length; j++) {
-//             if (newArr[i].charAt(0) !== vowels[j]) {
-//                 var x = newArr[i].slice(0,newArr.indexOf(vowels[j] )-1)
-//                 var y = newArr[i].slice(newArr.indexOf(vowels[j]) -1)
-//             }
-//         }
-//     }
-//     return y + x + "ay"
-// }
 
-// function checkForQu (string) {
-//     var newArr = string.split(" ")
-//     for (let i = 0; i < newArr.length; i++) {
-//         for (let j = 0; j < vowels.length; j++) {
-//             if (newArr[i].charAt(0) !== vowels[j]) {
-//                 if(newArr[i].includes("u") && newArr[i].charAt([newArr[i].indexOf('u')-1])=== "q")
-//                 var x = newArr[i].slice(0,newArr[i].indexOf("u")+1)
-//                 var y = newArr[i].slice(newArr[i].indexOf("u")+1)
-//             }
-//         }
-//     }
-//     return y + x + "ay"
-// }
+var vowels = ["A", "a", "E", "e", "I", "i", "O", "o", "U", "u", "y"]
 
-// console.log(checkForQu("squeal"));
+const hasNums = (string) => {
+    var matches = document.getElementById("user-input").value.match(/\d+/g)
+    if (matches != null) {
+        return true
+    }
+    else {
+        return false
+    }
+}
 
-function translator (userInput) {
-    var newArr = userInput.split(" ")
-    var tempArr = []
-    for (let i = 0; i < newArr.length; i++) {
-        for (let j = 0; j < vowels.length; j++) {
-            if(newArr[i].charAt(0) === vowels[j]){
-                //calls vowel function
-                newArr[i] = asVowels(newArr[i])
-            }else if(newArr[i].charAt(0) === "Y" || newArr[i].charAt(0) === "y") {
-                tempArr.push(startsWithY(newArr[i]))
-                //call the y function
-                // return "conditional 2"
+const playSound = () => {
+    var audio = new Audio("Pigpissd.wav")
+    audio.oncanplaythrough = function () {}
+    audio.onended = function () {}
+    audio.play()
+}
+function pigLatin (sentence){
 
-            } else if(newArr[i].includes("u") && newArr[i].charAt([newArr[i].indexOf('u')-1])=== "q" {
-                //call the squeal function
-                // return "conditional 3"
-                // tempArr.push(startsWithQU(newArr[i]))
-            } else if (newArr[i].includes("u") && newArr[i].charAt([newArr[i].indexOf('u')-1])!== "q" && newArr[i].charAt(0) !== vowels[j]){
+  // convert the string recived to an array with all lower case letters
+  if (hasNums(sentence)) {
+      playSound()
+      alert("Please enter only strings")
+      return "enter only strings!"
+  }
+  
+  var newArr = sentence.toLowerCase().split(" ")
+  var indexNum = -1 // index num outside of the array length
 
-                    var z = newArr[i].indexOf(vowels[j])
-                    newArr[i] = startWithConst(newArr[i],z)
-                }
-                //call the const function
-                // return "conditional 4"
-            }
+  for (let i = 0; i < newArr.length; i++) {
+    // if the word in the [i] index starts with a vowel
+    if (vowels.includes(newArr[i].charAt(0)) && newArr[i].charAt(0) !== "y") {
+        newArr[i] = newArr[i]+"way" // add "way" to the end of the word
+        // check if the word start with a y
+    } else if (newArr[i].charAt(0) === "y") {
+        let a = newArr[i].slice(0,1) // first letter
+        let b = newArr[i].slice(1) // from the second letter to the end of the string
+        newArr[i] = b+a+"ay"
+        // It does not start with a vowel or a y
+    } else {
+        // if the word contains a u if it does check if next to the u there is a q
+        if (newArr[i].includes("u") && newArr[i].charAt(newArr[i].indexOf("u")-1) ==="q") {
+          // first letter and up to the u inclusive
+          let b = newArr[i].slice(newArr[i].indexOf("u")+1) // from the u to the end of the word
+          let a = newArr[i].slice(0,newArr[i].indexOf("u")+1)
+          newArr[i] = b+a+"ay"
         }
-
-
-    return tempArr.join(" ")
+        // if it does not contain the QU sequence
+        else {
+          // find the index number of the first vowel in the word
+          for (let char of newArr[i]){ // for each loop to iterate inside the word in [i] position
+            if (vowels.includes(char)) {
+              indexNum = newArr[i].indexOf(char)
+              // stop the loop because we have found the first vowel
+              break;
+            }
+          }
+          let a = newArr[i].slice(0,indexNum) // first letter until first vowel not including the vowel
+          let b = newArr[i].slice(indexNum) // from the vowel until the end of the word
+          newArr[i] = b+a+"ay"
+        }
+      }
+  }
+  return newArr.map((x) => {
+      return  x.charAt(0).toUpperCase() + x.slice(1)
+  }).join(" ")
 }
-
-
-function asVowels (str) {
-    str = str+ "way"
-    return str
-}
-
-function startsWithY (string) {
-        let test = string.slice(0,1)
-        let b = string.slice(1)
-        string = b+test+"ay"
-    return string
-}
-
-function startsWithQU (str) {
-    var x = str.slice(0,str.indexOf("u")+1)
-    var y = str.slice(str.indexOf("u")+1)
-    return y + x + "ay"
-}
-
-function  startWithConst (string,indexNum){
-
-    var x = string.slice(0,indexNum-1)
-    var y = string.slice(indexNum-1)
-    return y+x+"ay"
-
-}
-// function startWithConst (string) {
-//     var newArr = string.split(" ")
-//     for (let i = 0; i < newArr.length; i++) {
-//         for (let j = 0; j < vowels.length; j++) {
-//             if (newArr[i].charAt(0) !== vowels[j]) {
-//                 var x = newArr[i].slice(0,newArr.indexOf(vowels[j] )-1)
-//                 var y = newArr[i].slice(newArr.indexOf(vowels[j]) -1)
-//             }
-//         }
-//     }
-//     return y + x + "ay"
-// }
-
-console.log(translator("yellow"));

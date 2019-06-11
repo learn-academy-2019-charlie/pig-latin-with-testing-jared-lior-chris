@@ -1,0 +1,168 @@
+body{
+    background-image: url("https://media.mnn.com/assets/images/2019/01/CutePigletLayingInGrass.jpg.653x0_q80_crop-smart.jpg") !important;
+    /* background-color: #DDDDDD !important; */
+    font-size: 1em;
+    line-height: 1.4;
+    font-family: 'Playfair Display', serif !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header-wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.header {
+    background-color: #7FDBFF;
+    text-align: center;
+    width: 40%;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    animation-name: bounceIn;
+    animation-duration: 2s;
+}
+
+.textarea {
+    margin-top: 50px;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.textinput {
+    width: 50%;
+    height: 75%;
+    float: left;
+    border: 5px solid black;
+    background-color: white;
+    margin-left:5px;
+    margin-right: 5px;
+    vertical-align: top;
+    opacity: 0.6;
+    border-radius: 10px;
+}
+.textinput:hover {
+    opacity: 1;
+}
+.textoutput:hover {
+    opacity: 1;
+}
+.textinput textarea{
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+.textoutput {
+    width: 50%;
+    height: 75%;
+    float: right;
+    border: 5px solid black;
+    background-color: white;
+    margin-right: 5px;
+    margin-left: 5px;
+    vertical-align: top;
+    position: relative;
+    opacity: 0.6;
+    border-radius: 10px;
+}
+.textoutput textarea{
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+#user-input {
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+#answers {
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.buttonbox {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.buttonbox button {
+    width: 25%;
+    font-size: 20px;
+    border: 2px solid #7FDBFF;
+}
+
+.buttonbox button:hover {
+    width: 25%;
+    font-size: 20px;
+    border: 2px dashed white;
+    background-color: #20B2AA;
+}
+
+#translate:active{
+    color: red;
+    border: 2px dashed yellow;
+}
+.footer {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    color: white;
+}
+
+.rules{
+    padding-top: 20px;
+    width: 500px;
+    height: 400px;
+    font-weight: bold;
+    color:black;
+    font-size: 20px;
+    text-align: left;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top: 50px;
+    margin-left: -250px;
+    background-color: white;
+    opacity: 0.6;
+    border: 5px solid black;
+    border-radius: 10px;
+}
+.rules h3{
+    text-align: center;
+}
+li{
+    list-style-position: inside !important;
+    text-indent: -1em;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
